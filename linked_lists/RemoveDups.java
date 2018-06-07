@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 class RemoveDups {
 	private static void removeDups(Node head) {
 		Set<Integer> occ = new HashSet<>();
