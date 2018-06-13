@@ -2,11 +2,31 @@ import java.util.*;
 
 class StackMin {
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
+		MyStack<Integer> stack = new MyStack<Integer>();
+		System.out.println(stack.isEmpty());
+		stack.push(2);
+		System.out.println(stack.isEmpty());
+		System.out.println("Top: " + stack.peek());
+		System.out.println("Min: " + stack.min());
+		stack.push(3);
+		System.out.println("Top: " + stack.peek());
+		System.out.println("Min: " + stack.min());
+		stack.push(1);
+		System.out.println("Top: " + stack.peek());
+		System.out.println("Min: " + stack.min());
+		System.out.println(stack.isEmpty());
+		System.out.println(stack.pop());
+		System.out.println("Top: " + stack.peek());
+		System.out.println("Min: " + stack.min());
+		System.out.println(stack.pop());
+		System.out.println("Top: " + stack.peek());
+		System.out.println("Min: " + stack.min());
+		System.out.println(stack.pop());
+
 	}
 }
 
-class MyStack<T> {
+class MyStack<T extends Comparable<T>> {
 	private static class StackNode<T> {
 		private T data;
 		private T min;
@@ -28,7 +48,7 @@ class MyStack<T> {
 	}
 
 	public void push(T item) {
-		StackNode<T> t = new StackNode<T>(item, min(item, top.min));
+		StackNode<T> t = new StackNode<T>(item, top == null ? item : min(item, top.min));
 		t.next = top;
 		top = t;
 	}
@@ -42,8 +62,12 @@ class MyStack<T> {
 		return top == null;
 	}
 
+	public T min() {
+		return top.min;
+	}
+
 	private T min(T a, T b) {
-		return a > b ? b : a;
+		return a.compareTo(b) > 0 ? b : a;
 	}
 	
 }
